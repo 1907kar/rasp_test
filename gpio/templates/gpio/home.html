@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to Selva home</h1>
+    <ul>
+        {% for item in data %}
+            <li>{{item.name}}, {{item.state}}, {{item.gpio_id}}</li>
+        {% endfor %}
+    </ul>
+    <h2>Switches</h2>
+    {% for item in data %}
+        <ul>
+            {% if item.state == True %}
+            <form action="" method="POST">
+                {% csrf_token %}
+                <li>
+                    <input type="checkbox" name={{item.name}} checked>{{item.name}}</input>  
+                    <button type="submit" name={{item.name}}>Save</button>                  
+                </li>
+
+            </form> 
+            {% else %}
+            <form action="" method="POST">
+                {% csrf_token %}
+                <li>
+                    <input type="checkbox" name={{item.name}}>{{item.name}}</input>
+                    <button type="submit" name={{item.name}}>Save</button>
+                </li>
+            </form>
+            {% endif %}
+        </ul>    
+    {% endfor %}
+
+    <h2>Pi info</h2>
+    <p>{{system.data}}</p>
+   
+</body>
+</html>
