@@ -12,24 +12,41 @@ def home(request):
     """
     # Collect data from Button model
     button_data = models.Button.objects.values()
+    # Picks the last data from the model
     system_data = models.SystemInfo.objects.values().last()
     # Handles POST call from html template
     if request.POST:
+        # Collected dict keys, to get the name of the submit button that we are clicking 
         html_data = list(request.POST.keys())
+        # The name will be available at the index position 1 of the keys list
         html_name = html_data[1]
-        html_state = request.POST.getlist(html_name)[0] == 'on'
+        # Getlist is called on the particular queryse dict object to get the list of values passed for the name.
+        # Here the list is generated with 2 index postion as for the same name we have checkbox and save button
+        # If the check box is checked it returns value as "on". Checking using == operator, returns True or False
+        html_state = request.POST.getlist(html_name)[0] == 'on'        
+        # Models operation: 
+        # Get the particular role using name of the row
         button_obj = models.Button.objects.get(name=html_name)
+        # Replacing existing True/False state with new state
         button_obj.state = html_state
+        # Saving the model changes
         button_obj.save()
+        # Returns back to same page
         return redirect(reverse('gpio:home'))
     # Handles API transactions
     elif 'api/' in request.path:
         # Handles UPDATE method from api
         if request.method == 'UPDATE':
+            # Decodes the json data from the request body
             json_data = json.loads(request.body.decode("utf-8"))
+            # Iterates list of json data
             for data in json_data:
+                # Models operation: 
+                # Get the particular role using name of the row
                 button_obj = models.Button.objects.get(name=data['name'])
+                # Replacing existing True/False state with new state
                 button_obj.state = data['state']
+                # Saving the model changes
                 button_obj.save()
             return HttpResponse(status=202, content='Status updated successfully')
         elif request.method == 'POST':

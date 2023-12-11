@@ -2,16 +2,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
 </head>
 <body>
-    <h1>Welcome to Selva home</h1>
-    <ul>
-        {% for item in data %}
-            <li>{{item.name}}, {{item.state}}, {{item.gpio_id}}</li>
-        {% endfor %}
-    </ul>
+    <h1>Welcome Back!</h1>
     <h2>Switches</h2>
+    <em>*Checked state represents the switch is on and viceversa.</em>
+    <em>Post modification need to click the individual save button to perform the action</em>
     {% for item in data %}
         <ul>
             {% if item.state == True %}
@@ -35,7 +32,7 @@
         </ul>    
     {% endfor %}
 
-    <h2>Pi info</h2>
+    <h2>Pi hardware info</h2>
     <p>{{system.data}}</p>
    
 </body>
