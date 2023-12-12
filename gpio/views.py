@@ -50,6 +50,8 @@ def home(request):
                 button_obj.save()
             return HttpResponse(status=202, content='Status updated successfully')
         elif request.method == 'POST':
+            # Delete existing values
+            models.SystemInfo.objects.all().delete()
             pi_data = request.body.decode("utf-8")
             system_info_obj = models.SystemInfo()
             system_info_obj.data = pi_data
