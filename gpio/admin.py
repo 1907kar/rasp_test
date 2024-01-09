@@ -5,3 +5,4 @@ from . import models
 admin.site.register(models.GPIO)
 admin.site.register(models.Button)
 admin.site.register(models.SystemInfo)
+admin.site.register(models.ImageRequest)

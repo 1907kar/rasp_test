@@ -15,8 +15,10 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 <li>
-                    <input type="checkbox" name={{item.name}} checked>{{item.name}}</input>  
-                    <button type="submit" name={{item.name}}>Save</button>                  
+                    <input type="checkbox" name={{item.name}} checked>{{item.name}}</input><br>  
+                    <input type="radio" name="img_{{item.name}}" value="True">Image Required
+                    <input type="radio" name="img_{{item.name}}" value="False">Image Not Required
+                    <button type="submit" name={{item.name}}>Save</button>                                    
                 </li>
 
             </form> 
@@ -24,8 +26,10 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 <li>
-                    <input type="checkbox" name={{item.name}}>{{item.name}}</input>
-                    <button type="submit" name={{item.name}}>Save</button>
+                    <input type="checkbox" name={{item.name}}>{{item.name}}</input><br>
+                    <input type="radio" name="img_{{item.name}}" value="True">Image Required
+                    <input type="radio" name="img_{{item.name}}" value="False">Image Not Required
+                    <button type="submit" name={{item.name}}>Save</button>                    
                 </li>
             </form>
             {% endif %}
@@ -34,6 +38,9 @@
 
     <h2>Pi hardware info</h2>
     <p>{{system.data}}</p>
+   
+    <h2>Image request</h2>
+    <p>pass</p>
    
 </body>
 </html>
